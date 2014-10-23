@@ -26,7 +26,7 @@
 		void (^oldCompBlock)() = self.completionBlock;
 #endif
 		[(AFHTTPRequestOperation*)self setCompletionBlockWithSuccess:^(id operation, id responseObject) {
-			[subject sendNext:responseObject];
+			[subject sendNext:RACTuplePack(operation, responseObject)];
 			[subject sendCompleted];
 #ifdef RAFN_MAINTAIN_COMPLETION_BLOCKS
 			if (oldCompBlock) {
